@@ -6,8 +6,9 @@ import Chatbot from '@/components/Chatbot';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { supabase } from '@/integrations/supabase/client';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Button } from '@/components/ui/button';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Thermometer, Droplets, Wind, Leaf } from 'lucide-react';
+import { Thermometer, Droplets, Wind, Leaf, RefreshCw } from 'lucide-react';
 import { toast } from 'sonner';
 
 const Monitoring = () => {
@@ -16,6 +17,7 @@ const Monitoring = () => {
   const [farms, setFarms] = useState<any[]>([]);
   const [selectedFarm, setSelectedFarm] = useState<string>('');
   const [monitoringData, setMonitoringData] = useState<any[]>([]);
+  const [isLoadingWeather, setIsLoadingWeather] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -66,6 +68,54 @@ const Monitoring = () => {
     }
   };
 
+  const fetchWeatherData = async () => {
+    if (!selectedFarm) {
+      toast.error('Please select a farm first');
+      return;
+    }
+
+    setIsLoadingWeather(true);
+    try {
+      const farm = farms.find(f => f.id === selectedFarm);
+      if (!farm) {
+        toast.error('Farm not found');
+        return;
+      }
+
+      // Call the edge function to get weather data
+      const { data, error } = await supabase.functions.invoke('fetch-weather', {
+        body: { location: farm.location }
+      });
+
+      if (error) throw error;
+
+      // Insert the weather data into monitoring_data table
+      const { error: insertError } = await supabase
+        .from('monitoring_data')
+        .insert({
+          farm_id: selectedFarm,
+          temperature: data.temperature,
+          humidity: data.humidity,
+          soil_moisture: data.soil_moisture,
+          soil_ph: data.soil_ph,
+          nitrogen: data.nitrogen,
+          phosphorus: data.phosphorus,
+          potassium: data.potassium,
+          weather_condition: data.weather_condition
+        });
+
+      if (insertError) throw insertError;
+
+      toast.success('Weather data fetched and saved successfully!');
+      fetchMonitoringData(); // Refresh the data
+    } catch (error: any) {
+      console.error('Error fetching weather data:', error);
+      toast.error(error.message || 'Failed to fetch weather data');
+    } finally {
+      setIsLoadingWeather(false);
+    }
+  };
+
   const latestData = monitoringData[monitoringData.length - 1];
 
   return (
@@ -81,7 +131,7 @@ const Monitoring = () => {
 
         {farms.length > 0 ? (
           <>
-            <div className="mb-6">
+            <div className="mb-6 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
               <Select value={selectedFarm} onValueChange={setSelectedFarm}>
                 <SelectTrigger className="w-full max-w-sm">
                   <SelectValue placeholder="Select a farm" />
@@ -94,6 +144,14 @@ const Monitoring = () => {
                   ))}
                 </SelectContent>
               </Select>
+              <Button 
+                onClick={fetchWeatherData} 
+                disabled={isLoadingWeather || !selectedFarm}
+                className="gap-2"
+              >
+                <RefreshCw className={`h-4 w-4 ${isLoadingWeather ? 'animate-spin' : ''}`} />
+                Fetch Live Weather
+              </Button>
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
