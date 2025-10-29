@@ -14,6 +14,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [farms, setFarms] = useState<any[]>([]);
   const [recentMonitoring, setRecentMonitoring] = useState<any[]>([]);
+  const [recommendationsCount, setRecommendationsCount] = useState(0);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -24,8 +25,21 @@ const Dashboard = () => {
   useEffect(() => {
     if (user) {
       fetchFarms();
+      fetchRecommendationsCount();
     }
   }, [user]);
+
+  const fetchRecommendationsCount = async () => {
+    const { data: farmsData } = await supabase.from('farms').select('id');
+    if (farmsData && farmsData.length > 0) {
+      const farmIds = farmsData.map(f => f.id);
+      const { count } = await supabase
+        .from('recommendations')
+        .select('*', { count: 'exact', head: true })
+        .in('farm_id', farmIds);
+      setRecommendationsCount(count || 0);
+    }
+  };
 
   const fetchFarms = async () => {
     const { data, error } = await supabase
@@ -117,7 +131,7 @@ const Dashboard = () => {
               <TrendingUp className="h-4 w-4 text-secondary" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">0</div>
+              <div className="text-2xl font-bold">{recommendationsCount}</div>
               <p className="text-xs text-muted-foreground">Active suggestions</p>
             </CardContent>
           </Card>
