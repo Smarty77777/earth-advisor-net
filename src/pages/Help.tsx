@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import Navigation from '@/components/Navigation';
@@ -18,6 +18,22 @@ const Help = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
+  const ticketFormRef = useRef<HTMLDivElement>(null);
+
+  const handleViewDocs = () => {
+    // Scroll to FAQ section
+    const faqSection = document.getElementById('faq-section');
+    faqSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const handleOpenChat = () => {
+    setChatOpen(true);
+  };
+
+  const handleCreateTicket = () => {
+    ticketFormRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   const handleSubmitTicket = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -69,7 +85,7 @@ const Help = () => {
               <p className="text-sm text-muted-foreground mb-4">
                 Browse our comprehensive guides and tutorials
               </p>
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" className="w-full" onClick={handleViewDocs}>
                 View Docs
               </Button>
             </CardContent>
@@ -86,7 +102,7 @@ const Help = () => {
               <p className="text-sm text-muted-foreground mb-4">
                 Get instant answers from our AI chatbot
               </p>
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" className="w-full" onClick={handleOpenChat}>
                 Open Chat
               </Button>
             </CardContent>
@@ -103,14 +119,14 @@ const Help = () => {
               <p className="text-sm text-muted-foreground mb-4">
                 Submit a ticket for personalized assistance
               </p>
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" className="w-full" onClick={handleCreateTicket}>
                 Create Ticket
               </Button>
             </CardContent>
           </Card>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid gap-6 lg:grid-cols-2" id="faq-section">
           <Card>
             <CardHeader>
               <CardTitle>Frequently Asked Questions</CardTitle>
@@ -174,7 +190,7 @@ const Help = () => {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card ref={ticketFormRef}>
             <CardHeader>
               <CardTitle>Submit Support Ticket</CardTitle>
               <CardDescription>
@@ -227,7 +243,7 @@ const Help = () => {
           </Card>
         </div>
       </main>
-      <Chatbot />
+      <Chatbot isOpen={chatOpen} setIsOpen={setChatOpen} />
     </div>
   );
 };

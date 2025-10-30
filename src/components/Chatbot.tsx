@@ -12,8 +12,16 @@ type Message = {
   content: string;
 };
 
-const Chatbot = () => {
-  const [isOpen, setIsOpen] = useState(false);
+type ChatbotProps = {
+  isOpen?: boolean;
+  setIsOpen?: (open: boolean) => void;
+};
+
+const Chatbot = ({ isOpen: externalIsOpen, setIsOpen: externalSetIsOpen }: ChatbotProps = {}) => {
+  const [internalIsOpen, setInternalIsOpen] = useState(false);
+  
+  const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
+  const setIsOpen = externalSetIsOpen || setInternalIsOpen;
   const [messages, setMessages] = useState<Message[]>([
     { role: 'assistant', content: 'Hello! I\'m your EcoFarm AI assistant. How can I help you with your farming needs today?' }
   ]);
