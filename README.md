@@ -55,7 +55,6 @@ It combines **IoT sensors**, **cloud processing**, and **machine learning** to t
 ## ⚙️ Technical Requirements
 | Category | Details |
 |-----------|----------|
-| 🧩 **Hardware** | Soil, humidity, temperature, and NPK sensors; microcontroller (ESP32/Arduino); optional camera module |
 | 🌐 **Connectivity** | Internet (Wi-Fi, GSM, or LoRaWAN) |
 | 💻 **Software** | Python / Node.js backend, React or Flutter frontend |
 | ☁️ **Cloud / DB** | Firebase / AWS / PostgreSQL / MongoDB |
