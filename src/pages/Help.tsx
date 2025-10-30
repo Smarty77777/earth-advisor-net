@@ -22,9 +22,9 @@ const Help = () => {
   const ticketFormRef = useRef<HTMLDivElement>(null);
 
   const handleViewDocs = () => {
-    // Scroll to FAQ section
-    const faqSection = document.getElementById('faq-section');
-    faqSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Scroll to documentation section
+    const docsSection = document.getElementById('docs-section');
+    docsSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const handleOpenChat = () => {
@@ -125,6 +125,72 @@ const Help = () => {
             </CardContent>
           </Card>
         </div>
+
+        <Card className="lg:col-span-2 mb-6" id="docs-section">
+          <CardHeader>
+            <CardTitle>Documentation & Guides</CardTitle>
+            <CardDescription>
+              Comprehensive tutorials to help you get the most out of EcoFarm
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Getting Started</CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm text-muted-foreground">
+                  Learn how to set up your account, register your first farm, and navigate the dashboard.
+                </CardContent>
+              </Card>
+              
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Monitoring Guide</CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm text-muted-foreground">
+                  Understand sensor data, interpret trends, and use real-time monitoring for better farm management.
+                </CardContent>
+              </Card>
+              
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">AI Recommendations</CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm text-muted-foreground">
+                  Discover how to generate and implement AI-powered insights for crop selection and farm optimization.
+                </CardContent>
+              </Card>
+              
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Expert Consultations</CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm text-muted-foreground">
+                  Book and prepare for consultations with agricultural experts to get personalized advice.
+                </CardContent>
+              </Card>
+              
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Best Practices</CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm text-muted-foreground">
+                  Learn farming best practices, sustainable techniques, and how to maximize your yields.
+                </CardContent>
+              </Card>
+              
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Troubleshooting</CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm text-muted-foreground">
+                  Solutions for common issues, sensor calibration, and technical support resources.
+                </CardContent>
+              </Card>
+            </div>
+          </CardContent>
+        </Card>
 
         <div className="grid gap-6 lg:grid-cols-2" id="faq-section">
           <Card>
