@@ -129,7 +129,7 @@ Empowering farmers with innovation, ensuring fair trade, and promoting ethical, 
 
 ## 💚 Thank You!
 🌱 *Grow with Purpose. Innovate with Impact.*  
-📩 For queries or collaborations, contact: **sumitra.ray2023@iem.edu.in**
+📩 For queries or collaborations, contact: **sumitra.ray2023@iem.edu.in, abhishek.ray2023@iem.edu.in**
 
 ---
 
