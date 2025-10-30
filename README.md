@@ -2,7 +2,6 @@
 
 ## Project info
 
-**URL**: https://ecofarm-xi.vercel.app/
 
 ## How can I edit this code?
 
