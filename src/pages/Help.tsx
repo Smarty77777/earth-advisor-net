@@ -63,21 +63,25 @@ const Help = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-background">
       <Navigation />
       <main className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Help & Support</h1>
-          <p className="text-muted-foreground">
+        <div className="mb-8 animate-in fade-in slide-in-from-top duration-700">
+          <h1 className="text-5xl font-bold mb-3 bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent">
+            Help & Support
+          </h1>
+          <p className="text-lg text-muted-foreground">
             Find answers to common questions or contact support
           </p>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3 mb-8">
-          <Card>
+          <Card className="border-primary/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-primary/5">
             <CardHeader>
-              <div className="flex items-center gap-2">
-                <BookOpen className="h-5 w-5 text-primary" />
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+                  <BookOpen className="h-5 w-5 text-primary" />
+                </div>
                 <CardTitle>Documentation</CardTitle>
               </div>
             </CardHeader>
@@ -85,16 +89,18 @@ const Help = () => {
               <p className="text-sm text-muted-foreground mb-4">
                 Browse our comprehensive guides and tutorials
               </p>
-              <Button variant="outline" className="w-full" onClick={handleViewDocs}>
+              <Button variant="outline" className="w-full hover:bg-primary/5 hover:border-primary" onClick={handleViewDocs}>
                 View Docs
               </Button>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-accent/5">
             <CardHeader>
-              <div className="flex items-center gap-2">
-                <MessageCircle className="h-5 w-5 text-accent" />
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-full bg-accent/10 flex items-center justify-center">
+                  <MessageCircle className="h-5 w-5 text-accent" />
+                </div>
                 <CardTitle>AI Assistant</CardTitle>
               </div>
             </CardHeader>
@@ -102,16 +108,18 @@ const Help = () => {
               <p className="text-sm text-muted-foreground mb-4">
                 Get instant answers from our AI chatbot
               </p>
-              <Button variant="outline" className="w-full" onClick={handleOpenChat}>
+              <Button variant="outline" className="w-full hover:bg-accent/5 hover:border-accent" onClick={handleOpenChat}>
                 Open Chat
               </Button>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="border-secondary/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-secondary/5">
             <CardHeader>
-              <div className="flex items-center gap-2">
-                <Send className="h-5 w-5 text-secondary" />
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-full bg-secondary/10 flex items-center justify-center">
+                  <Send className="h-5 w-5 text-secondary" />
+                </div>
                 <CardTitle>Contact Support</CardTitle>
               </div>
             </CardHeader>
@@ -119,16 +127,16 @@ const Help = () => {
               <p className="text-sm text-muted-foreground mb-4">
                 Submit a ticket for personalized assistance
               </p>
-              <Button variant="outline" className="w-full" onClick={handleCreateTicket}>
+              <Button variant="outline" className="w-full hover:bg-secondary/5 hover:border-secondary" onClick={handleCreateTicket}>
                 Create Ticket
               </Button>
             </CardContent>
           </Card>
         </div>
 
-        <Card className="lg:col-span-2 mb-6" id="docs-section">
-          <CardHeader>
-            <CardTitle>Documentation & Guides</CardTitle>
+        <Card className="lg:col-span-2 mb-6 shadow-xl border-border/50" id="docs-section">
+          <CardHeader className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-t-lg">
+            <CardTitle className="text-2xl">Documentation & Guides</CardTitle>
             <CardDescription>
               Comprehensive tutorials to help you get the most out of EcoFarm
             </CardDescription>
@@ -193,9 +201,9 @@ const Help = () => {
         </Card>
 
         <div className="grid gap-6 lg:grid-cols-2" id="faq-section">
-          <Card>
-            <CardHeader>
-              <CardTitle>Frequently Asked Questions</CardTitle>
+          <Card className="shadow-lg border-border/50">
+            <CardHeader className="bg-gradient-to-r from-accent/5 to-primary/5 rounded-t-lg">
+              <CardTitle className="text-2xl">Frequently Asked Questions</CardTitle>
               <CardDescription>
                 Quick answers to common questions
               </CardDescription>
@@ -256,9 +264,9 @@ const Help = () => {
             </CardContent>
           </Card>
 
-          <Card ref={ticketFormRef}>
-            <CardHeader>
-              <CardTitle>Submit Support Ticket</CardTitle>
+          <Card ref={ticketFormRef} className="shadow-lg border-border/50">
+            <CardHeader className="bg-gradient-to-r from-secondary/5 to-accent/5 rounded-t-lg">
+              <CardTitle className="text-2xl">Submit Support Ticket</CardTitle>
               <CardDescription>
                 Need personalized help? Submit a ticket and we'll get back to you
               </CardDescription>

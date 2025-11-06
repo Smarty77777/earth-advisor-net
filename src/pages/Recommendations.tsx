@@ -142,12 +142,14 @@ const Recommendations = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-background via-secondary/5 to-background">
       <Navigation />
       <main className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">AI Recommendations</h1>
-          <p className="text-muted-foreground">
+        <div className="mb-8 animate-in fade-in slide-in-from-top duration-700">
+          <h1 className="text-5xl font-bold mb-3 bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
+            AI Recommendations
+          </h1>
+          <p className="text-lg text-muted-foreground">
             Get intelligent suggestions for optimizing your farm operations
           </p>
         </div>
@@ -168,8 +170,8 @@ const Recommendations = () => {
                 </SelectContent>
               </Select>
 
-              <Button onClick={generateAIRecommendations} disabled={generatingAI}>
-                <Lightbulb className="h-4 w-4 mr-2" />
+              <Button onClick={generateAIRecommendations} disabled={generatingAI} size="lg" className="shadow-lg">
+                <Lightbulb className="h-5 w-5 mr-2" />
                 {generatingAI ? 'Generating...' : 'Generate AI Recommendations'}
               </Button>
             </div>
@@ -177,8 +179,8 @@ const Recommendations = () => {
             {recommendations.length > 0 ? (
               <div className="grid gap-6">
                 {recommendations.map((rec) => (
-                  <Card key={rec.id}>
-                    <CardHeader>
+                  <Card key={rec.id} className="shadow-lg border-border/50 hover:shadow-xl transition-all duration-300 hover:border-primary/30">
+                    <CardHeader className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-t-lg">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">

@@ -100,61 +100,69 @@ const Experts = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-background">
       <Navigation />
       <main className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Expert Consultation</h1>
-          <p className="text-muted-foreground">
+        <div className="mb-8 animate-in fade-in slide-in-from-top duration-700">
+          <h1 className="text-5xl font-bold mb-3 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            Expert Consultation
+          </h1>
+          <p className="text-lg text-muted-foreground">
             Connect with agricultural experts for professional advice
           </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-3 mb-8">
-          <Card>
+          <Card className="border-primary/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-primary/5">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Users className="h-5 w-5 text-primary" />
+              <CardTitle className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Users className="h-5 w-5 text-primary" />
+                </div>
                 Available Experts
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold">15+</div>
-              <p className="text-sm text-muted-foreground">Certified agricultural experts</p>
+              <div className="text-4xl font-bold text-primary">15+</div>
+              <p className="text-sm text-muted-foreground mt-2">Certified agricultural experts</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-accent/5">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Clock className="h-5 w-5 text-accent" />
+              <CardTitle className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-full bg-accent/10 flex items-center justify-center">
+                  <Clock className="h-5 w-5 text-accent" />
+                </div>
                 Response Time
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold">24h</div>
-              <p className="text-sm text-muted-foreground">Average response time</p>
+              <div className="text-4xl font-bold text-accent">24h</div>
+              <p className="text-sm text-muted-foreground mt-2">Average response time</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="border-green-500/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-green-500/5">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-green-500" />
+              <CardTitle className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-full bg-green-500/10 flex items-center justify-center">
+                  <CheckCircle className="h-5 w-5 text-green-500" />
+                </div>
                 Success Rate
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold">95%</div>
-              <p className="text-sm text-muted-foreground">Problem resolution rate</p>
+              <div className="text-4xl font-bold text-green-500">95%</div>
+              <p className="text-sm text-muted-foreground mt-2">Problem resolution rate</p>
             </CardContent>
           </Card>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-2">
-          <Card>
-            <CardHeader>
-              <CardTitle>Book Expert Consultation</CardTitle>
+          <Card className="shadow-lg border-border/50">
+            <CardHeader className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-t-lg">
+              <CardTitle className="text-2xl">Book Expert Consultation</CardTitle>
               <CardDescription>
                 Schedule a session with our agricultural specialists
               </CardDescription>
@@ -236,9 +244,9 @@ const Experts = () => {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Your Appointments</CardTitle>
+          <Card className="shadow-lg border-border/50">
+            <CardHeader className="bg-gradient-to-r from-secondary/5 to-primary/5 rounded-t-lg">
+              <CardTitle className="text-2xl">Your Appointments</CardTitle>
               <CardDescription>
                 Track your consultation requests and history
               </CardDescription>

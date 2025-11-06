@@ -40,12 +40,15 @@ const Chatbot = ({ isOpen: externalIsOpen, setIsOpen: externalSetIsOpen }: Chatb
 
     const userMessage = input.trim();
     setInput('');
-    setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+    
+    // Build the complete messages array including the new user message
+    const updatedMessages: Message[] = [...messages, { role: 'user' as const, content: userMessage }];
+    setMessages(updatedMessages);
     setIsLoading(true);
 
     try {
       const { data, error } = await supabase.functions.invoke('chat', {
-        body: { messages: [...messages, { role: 'user', content: userMessage }] }
+        body: { messages: updatedMessages }
       });
 
       if (error) throw error;

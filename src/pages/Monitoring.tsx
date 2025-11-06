@@ -119,12 +119,14 @@ const Monitoring = () => {
   const latestData = monitoringData[monitoringData.length - 1];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-background via-accent/5 to-background">
       <Navigation />
       <main className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Farm Monitoring</h1>
-          <p className="text-muted-foreground">
+        <div className="mb-8 animate-in fade-in slide-in-from-top duration-700">
+          <h1 className="text-5xl font-bold mb-3 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
+            Farm Monitoring
+          </h1>
+          <p className="text-lg text-muted-foreground">
             Real-time environmental and soil data from your farms
           </p>
         </div>
@@ -155,66 +157,74 @@ const Monitoring = () => {
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
-              <Card>
+              <Card className="border-destructive/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-destructive/5">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                   <CardTitle className="text-sm font-medium">Temperature</CardTitle>
-                  <Thermometer className="h-4 w-4 text-destructive" />
+                  <div className="h-10 w-10 rounded-full bg-destructive/10 flex items-center justify-center">
+                    <Thermometer className="h-5 w-5 text-destructive" />
+                  </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">
+                  <div className="text-3xl font-bold text-destructive">
                     {latestData?.temperature ? `${latestData.temperature}°C` : '--'}
                   </div>
-                  <p className="text-xs text-muted-foreground">Current reading</p>
+                  <p className="text-xs text-muted-foreground mt-1">Current reading</p>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-accent/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-accent/5">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                   <CardTitle className="text-sm font-medium">Humidity</CardTitle>
-                  <Droplets className="h-4 w-4 text-accent" />
+                  <div className="h-10 w-10 rounded-full bg-accent/10 flex items-center justify-center">
+                    <Droplets className="h-5 w-5 text-accent" />
+                  </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">
+                  <div className="text-3xl font-bold text-accent">
                     {latestData?.humidity ? `${latestData.humidity}%` : '--'}
                   </div>
-                  <p className="text-xs text-muted-foreground">Air humidity</p>
+                  <p className="text-xs text-muted-foreground mt-1">Air humidity</p>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-primary/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-primary/5">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                   <CardTitle className="text-sm font-medium">Soil Moisture</CardTitle>
-                  <Droplets className="h-4 w-4 text-primary" />
+                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Droplets className="h-5 w-5 text-primary" />
+                  </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">
+                  <div className="text-3xl font-bold text-primary">
                     {latestData?.soil_moisture ? `${latestData.soil_moisture}%` : '--'}
                   </div>
-                  <p className="text-xs text-muted-foreground">Soil water content</p>
+                  <p className="text-xs text-muted-foreground mt-1">Soil water content</p>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-secondary/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-secondary/5">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                   <CardTitle className="text-sm font-medium">Soil pH</CardTitle>
-                  <Leaf className="h-4 w-4 text-secondary" />
+                  <div className="h-10 w-10 rounded-full bg-secondary/10 flex items-center justify-center">
+                    <Leaf className="h-5 w-5 text-secondary" />
+                  </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">
+                  <div className="text-3xl font-bold text-secondary">
                     {latestData?.soil_ph ? latestData.soil_ph.toFixed(1) : '--'}
                   </div>
-                  <p className="text-xs text-muted-foreground">Acidity level</p>
+                  <p className="text-xs text-muted-foreground mt-1">Acidity level</p>
                 </CardContent>
               </Card>
             </div>
 
             {monitoringData.length > 0 ? (
-              <Card>
-                <CardHeader>
-                  <CardTitle>Environmental Trends</CardTitle>
+              <Card className="shadow-xl border-border/50">
+                <CardHeader className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-t-lg">
+                  <CardTitle className="text-2xl">Environmental Trends</CardTitle>
                   <CardDescription>Historical data from the last 20 readings</CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="pt-6">
                   <div className="h-[400px]">
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart data={monitoringData}>
