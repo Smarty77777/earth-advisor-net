@@ -41,22 +41,34 @@ const Chatbot = ({ isOpen: externalIsOpen, setIsOpen: externalSetIsOpen }: Chatb
     const userMessage = input.trim();
     setInput('');
     
-    // Build the complete messages array including the new user message
-    const updatedMessages: Message[] = [...messages, { role: 'user' as const, content: userMessage }];
-    setMessages(updatedMessages);
+    // Add user message to UI immediately
+    const userMsg: Message = { role: 'user', content: userMessage };
+    setMessages(prev => [...prev, userMsg]);
     setIsLoading(true);
 
     try {
+      // Send all messages including the new one
+      const messagesToSend = [...messages, userMsg];
+      
       const { data, error } = await supabase.functions.invoke('chat', {
-        body: { messages: updatedMessages }
+        body: { messages: messagesToSend }
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase function error:', error);
+        throw error;
+      }
 
+      if (!data?.response) {
+        throw new Error('No response from AI');
+      }
+
+      // Add AI response
       setMessages(prev => [...prev, { role: 'assistant', content: data.response }]);
     } catch (error: any) {
       console.error('Chat error:', error);
-      toast.error('Failed to send message');
+      toast.error(error.message || 'Failed to send message');
+      // Add error message to chat
       setMessages(prev => [...prev, { 
         role: 'assistant', 
         content: 'I apologize, but I encountered an error. Please try again.' 
@@ -95,7 +107,7 @@ const Chatbot = ({ isOpen: externalIsOpen, setIsOpen: externalSetIsOpen }: Chatb
                 className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-[80%] rounded-lg px-4 py-2 ${
+                  className={`max-w-[80%] rounded-lg px-4 py-2 whitespace-pre-wrap ${
                     msg.role === 'user'
                       ? 'bg-primary text-primary-foreground'
                       : 'bg-muted'
